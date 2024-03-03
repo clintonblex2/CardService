@@ -22,6 +22,13 @@
         public const string FORBIDDEN_ERROR_CODE = "403";
         public const string CARD_ALREADY_EXIST = "Card already exist with the same name. Kindly update the card name and retry!";
         public const string CARD_NOT_EXIST = "Card does not exist.";
+        public const string CARD_ID_REQUIRED = "Card Id is required";
+        public const string CARD_STATUS_REQUIRED = "Card Status is required";
+        public const string INVALID_CARD_STATUS = "Invalid Card Status";
+        public const string INVALID_COLOR_FORMAT = "The color format should conform to 6 alphanumeric characters prefixed with a #";
+        public const string CARD_NAME_REQUIRED = "Card Name is required";
+        public const string INVALID_SORT_BY = "Invalid SortBy value. Kindly call the /SortBy endpoint to get the correct sorting value.";
+
 
         //Unexpected error
         public const string SERVER_ERROR_CODE = "500";
