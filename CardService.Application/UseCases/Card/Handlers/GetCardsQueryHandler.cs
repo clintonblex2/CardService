@@ -13,13 +13,13 @@ using Newtonsoft.Json;
 
 namespace CardService.Application.UseCases.Card.Handlers
 {
-    public class GetCardsQueryCommandHandler : IRequestHandler<GetCardsQuery, PagedList<CardResponseModel>>
+    public class GetCardsQueryHandler : IRequestHandler<GetCardsQuery, PagedList<CardResponseModel>>
     {
-        private readonly ILogger<GetCardsQueryCommandHandler> _logger;
+        private readonly ILogger<GetCardsQueryHandler> _logger;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _uow;
 
-        public GetCardsQueryCommandHandler(ILogger<GetCardsQueryCommandHandler> logger, IMapper mapper, IUnitOfWork uow)
+        public GetCardsQueryHandler(ILogger<GetCardsQueryHandler> logger, IMapper mapper, IUnitOfWork uow)
         {
             _logger = logger;
             _mapper = mapper;
@@ -28,7 +28,7 @@ namespace CardService.Application.UseCases.Card.Handlers
 
         public async Task<PagedList<CardResponseModel>> Handle(GetCardsQuery request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"{nameof(GetCardsQueryCommandHandler)} {JsonConvert.SerializeObject(request)}");
+            _logger.LogInformation($"{nameof(GetCardsQueryHandler)} {JsonConvert.SerializeObject(request)}");
 
             var cards = _uow.Repository<CardEntity>().FilterAsNoTracking(
                 filter: x => !x.IsDeleted,
