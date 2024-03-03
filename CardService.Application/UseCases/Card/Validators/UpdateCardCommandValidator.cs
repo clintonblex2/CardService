@@ -5,6 +5,7 @@ using CardService.Application.UseCases.Card.Commands;
 using CardService.Domain.Entities;
 using CardService.Domain.Enums;
 using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -23,33 +24,33 @@ namespace CardService.Application.UseCases.Card.Validators
             _uow = uow;
 
             RuleFor(x => x.CardId)
-            .NotEmpty().WithMessage("Card Id is required");
+            .NotEmpty().WithMessage(BaseStrings.CARD_ID_REQUIRED);
             
             RuleFor(x => x.Name)
-            .NotEmpty().WithMessage("Card Name is required");
+            .NotEmpty().WithMessage(BaseStrings.CARD_NAME_REQUIRED);
 
             RuleFor(x => x.Status)
-            .NotEmpty().WithMessage("Card Status is required")
-            .Must(BeAValidEnumValue).WithMessage("Card Status must be a valid Status value");
+            .NotEmpty().WithMessage(BaseStrings.CARD_STATUS_REQUIRED)
+            .Must(BeAValidEnumValue).WithMessage(BaseStrings.INVALID_CARD_STATUS);
 
             // Conditional validation for Color
             // Only apply the regex rule if Color is not null or empty
             When(x => !string.IsNullOrEmpty(x.Color), () =>
             {
                 RuleFor(x => x.Color)
-                    .Matches("^#[0-9a-fA-F]{6}$")
-                    .WithMessage("Color should be in the format #RRGGBB where RR, GG, and BB are hexadecimal values.");
+                    .Matches("^#[A-Za-z0-9]{6}$")
+                    .WithMessage(BaseStrings.INVALID_COLOR_FORMAT);
             });
 
             RuleFor(x => x).Custom((data, context) =>
             {
                 var isExist = _uow.Repository<CardEntity>().Exist(x => x.UserId == data.UserId && x.Id == data.CardId && !x.IsDeleted);
                 if (!isExist)
-                    throw new CustomException(BaseStrings.CARD_NOT_EXIST);
+                    context.AddFailure(new ValidationFailure(nameof(UpdateCardCommand.CardId), BaseStrings.CARD_NOT_EXIST));
 
                 isExist = _uow.Repository<CardEntity>().Exist(x => x.UserId == data.UserId && x.Name == data.Name && x.Id != data.CardId && !x.IsDeleted);
                 if (isExist)
-                    throw new CustomException(BaseStrings.CARD_ALREADY_EXIST);
+                    context.AddFailure(new ValidationFailure(nameof(UpdateCardCommand.Name), BaseStrings.CARD_ALREADY_EXIST));
             });
         }
 
