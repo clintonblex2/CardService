@@ -95,10 +95,10 @@ namespace CardService.UnitTests.Features
         {
             // Arrange
             var command = new CreateCardCommand { UserId = 1, Name = "Existing Card" };
-        
+
             var repositoryMock = new Mock<IRepository<CardEntity>>();
             repositoryMock.Setup(r => r.Exist(It.IsAny<Expression<Func<CardEntity, bool>>>())).Returns(true);
-            
+
             // Act
             var result = _validator.TestValidate(command);
 

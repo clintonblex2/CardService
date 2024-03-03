@@ -2,21 +2,13 @@
 using CardService.Application.Common.Helpers;
 using CardService.Application.Common.Interfaces;
 using CardService.Application.Common.Mapper;
-using CardService.Application.UseCases.Card.Commands;
 using CardService.Application.UseCases.Card.Handlers;
 using CardService.Application.UseCases.Card.Queries;
-using CardService.Application.UseCases.Card.Validators;
 using CardService.Domain.Entities;
 using CardService.Domain.Enums;
-using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardService.UnitTests.Features
 {
@@ -91,7 +83,7 @@ namespace CardService.UnitTests.Features
                 It.IsAny<Expression<Func<CardEntity, bool>>>(), // Mock any filter
                 It.IsAny<Expression<Func<CardEntity, object>>[]>()))
                 .ReturnsAsync(sampleCard);
-            
+
             // Act
             var response = await _handler.Handle(query, cancellationToken);
 

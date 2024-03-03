@@ -38,7 +38,7 @@ namespace CardService.Application.UseCases.Card.Handlers
                 cards = cards.Where(x => x.UserId == request.UserId);
 
             // Apply filters
-            if(Enum.TryParse(request.Status, true, out Status cardStatus))
+            if (Enum.TryParse(request.Status, true, out Status cardStatus))
                 cards = cards.ApplyFilter(c => c.Status == cardStatus);
 
             cards = cards.ApplyFilter(c => string.IsNullOrEmpty(request.Name) || c.Name.Contains(request.Name));

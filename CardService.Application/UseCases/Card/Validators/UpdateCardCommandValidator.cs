@@ -1,17 +1,10 @@
-﻿using CardService.Application.Common.Exceptions;
-using CardService.Application.Common.Helpers;
+﻿using CardService.Application.Common.Helpers;
 using CardService.Application.Common.Interfaces;
 using CardService.Application.UseCases.Card.Commands;
 using CardService.Domain.Entities;
 using CardService.Domain.Enums;
 using FluentValidation;
 using FluentValidation.Results;
-using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardService.Application.UseCases.Card.Validators
 {
@@ -25,7 +18,7 @@ namespace CardService.Application.UseCases.Card.Validators
 
             RuleFor(x => x.CardId)
             .NotEmpty().WithMessage(BaseStrings.CARD_ID_REQUIRED);
-            
+
             RuleFor(x => x.Name)
             .NotEmpty().WithMessage(BaseStrings.CARD_NAME_REQUIRED);
 

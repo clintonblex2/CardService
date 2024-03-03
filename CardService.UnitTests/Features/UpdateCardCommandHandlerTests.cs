@@ -10,12 +10,7 @@ using CardService.Domain.Enums;
 using FluentValidation.TestHelper;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardService.UnitTests.Features
 {
