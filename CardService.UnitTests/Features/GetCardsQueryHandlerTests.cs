@@ -3,7 +3,6 @@ using CardService.Application.Common.Enums;
 using CardService.Application.Common.Helpers;
 using CardService.Application.Common.Interfaces;
 using CardService.Application.Common.Mapper;
-using CardService.Application.UseCases.Card.Commands;
 using CardService.Application.UseCases.Card.Handlers;
 using CardService.Application.UseCases.Card.Queries;
 using CardService.Application.UseCases.Card.Validators;
@@ -13,12 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardService.UnitTests.Features
 {

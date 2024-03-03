@@ -36,7 +36,7 @@ namespace CardService.UnitTests.Features
 
             _repositoryMock = new Mock<IRepository<CardEntity>>();
             _repositoryMock.Setup(r => r.Exist(It.IsAny<Expression<Func<CardEntity, bool>>>())).Returns(true);
-            _repositoryMock.Setup(r => r.FindAsync(It.IsAny<Expression<Func<CardEntity, bool>>>())).ReturnsAsync(new CardEntity { Name = "Test"});
+            _repositoryMock.Setup(r => r.FindAsync(It.IsAny<Expression<Func<CardEntity, bool>>>())).ReturnsAsync(new CardEntity { Name = "Test" });
             _uowMock.Setup(u => u.Repository<CardEntity>()).Returns(_repositoryMock.Object);
             _uowMock.Setup(uow => uow.Complete(cancellationToken)).Returns(Task.FromResult(true)).Verifiable();
         }
@@ -77,7 +77,7 @@ namespace CardService.UnitTests.Features
         {
             // Arrange
             var request = new DeleteCardCommand { UserId = 1, CardId = 1 };
-   
+
             _uowMock.Setup(u => u.Repository<CardEntity>()).Returns(_repositoryMock.Object);
 
             // Act

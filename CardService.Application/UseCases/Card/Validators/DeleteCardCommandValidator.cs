@@ -1,5 +1,4 @@
-﻿using CardService.Application.Common.Exceptions;
-using CardService.Application.Common.Helpers;
+﻿using CardService.Application.Common.Helpers;
 using CardService.Application.Common.Interfaces;
 using CardService.Application.UseCases.Card.Commands;
 using CardService.Domain.Entities;
