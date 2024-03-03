@@ -4,6 +4,7 @@ using CardService.Application.Common.Interfaces;
 using CardService.Application.UseCases.Card.Commands;
 using CardService.Domain.Entities;
 using FluentValidation;
+using FluentValidation.Results;
 
 namespace CardService.Application.UseCases.Card.Validators
 {
@@ -16,13 +17,13 @@ namespace CardService.Application.UseCases.Card.Validators
             _uow = uow;
 
             RuleFor(x => x.CardId)
-            .NotEmpty().WithMessage("Card Id is required");
+            .NotEmpty().WithMessage(BaseStrings.CARD_ID_REQUIRED);
 
             RuleFor(x => x).Custom((data, context) =>
             {
                 var isExist = _uow.Repository<CardEntity>().Exist(x => x.UserId == data.UserId && x.Id == data.CardId && !x.IsDeleted);
                 if (!isExist)
-                    throw new CustomException(BaseStrings.CARD_NOT_EXIST);
+                    context.AddFailure(new ValidationFailure(nameof(DeleteCardCommand.CardId), BaseStrings.CARD_NOT_EXIST));
             });
         }
     }

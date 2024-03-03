@@ -1,4 +1,5 @@
-﻿using CardService.Application.UseCases.Card.Queries;
+﻿using CardService.Application.Common.Helpers;
+using CardService.Application.UseCases.Card.Queries;
 using CardService.Domain.Enums;
 using FluentValidation;
 
@@ -12,7 +13,7 @@ namespace CardService.Application.UseCases.Card.Validators
             When(x => !string.IsNullOrEmpty(x.SortBy), () =>
             {
                 RuleFor(x => x.SortBy)
-                .Must(BeAValidEnumValue).WithMessage("SortBy must be a valid enum");
+                .Must(BeAValidEnumValue).WithMessage(BaseStrings.INVALID_SORT_BY);
             });
 
         }
